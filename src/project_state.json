@@ -1,9 +1,10 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 9,
-  "summary": "Romantic multi-slide website featuring 4-line romantic shayari per slide, with optional background music (user requested 'Tum Hi Ho'), interactive music elements, and ending with a different beautiful interactive mini-game (replacing the teddy mini-game).",
+  "projectStateVersion": 11,
+  "summary": "Romantic multi-slide website featuring 4-line romantic shayari per slide, with optional background music (user requested 'Tum Hi Ho'), interactive music elements, and ending with a new mini-game where drawing/writing the name of an object/place/being transforms it into a 3D interactive model.",
   "architectural_notes": [
-    "Audio licensing/usage for 'Tum Hi Ho' must be clarified; avoid shipping copyrighted media without permission (consider user-provided file or royalty-free alternative)."
+    "Audio licensing/usage for 'Tum Hi Ho' must be clarified; avoid shipping copyrighted media without permission (consider user-provided file or royalty-free alternative).",
+    "Ending mini-game will require 3D rendering support (e.g., WebGL/three.js) and a defined approach for mapping user input (drawn/written names) to available 3D models/assets."
   ],
   "known_issues": [],
   "isFixRequest": false,
@@ -127,6 +128,46 @@
         "REQ-15"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-replace-the-current-ending-mini-game-the-heart-collecting-endinggameslide-with-a-new-final-slide-experience-where-the-user-provides-the-name-of-an-object-place-or-being-and-the-scene-changes-to-a-corresponding-interactive-3d-model",
+      "title": "Replace the current ending mini-game (the heart-collecting EndingGameSlide) with a new final-slide experience where the user provides the name of an object, place, or being, and the scene changes to a corresponding interactive 3D model.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-new-ending-mini-game-as-a-dedicated-react-component-that-includes-1-a-simple-draw-the-name-area-freehand-canvas-and-2-a-text-input-that-drives-the-actual-selection-submitting-the-name-swaps-the-displayed-3d-model",
+      "title": "Implement the new ending mini-game as a dedicated React component that includes: (1) a simple “draw the name” area (freehand canvas) and (2) a text input that drives the actual selection; submitting the name swaps the displayed 3D model.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-interactive-3d-viewer-on-the-final-slide-that-displays-the-selected-model-and-supports-user-interaction-rotate-orbit-zoom-and-pan-as-appropriate-for-desktop-and-touch",
+      "title": "Add an interactive 3D viewer on the final slide that displays the selected model and supports user interaction (rotate/orbit, zoom, and pan as appropriate for desktop and touch).",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-define-a-fixed-offline-mapping-from-a-small-curated-set-of-supported-names-objects-places-beings-to-bundled-local-3d-model-assets-and-show-a-friendly-english-message-when-the-user-enters-an-unsupported-name",
+      "title": "Define a fixed, offline mapping from a small curated set of supported names (objects/places/beings) to bundled local 3D model assets, and show a friendly English message when the user enters an unsupported name.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-integrate-the-new-ending-mini-game-with-the-existing-local-sound-effects-setting-so-interactions-submitting-a-name-model-swap-and-completion-style-moment-if-you-add-one-trigger-optional-sfx-while-preserving-the-current-background-music-behavior",
+      "title": "Integrate the new ending mini-game with the existing local Sound Effects setting so interactions (submitting a name, model swap, and completion-style moment if you add one) trigger optional SFX while preserving the current background music behavior.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -153,9 +194,15 @@
       "summary": "Add interactive music elements (music that reacts to user interactions, e.g., taps/clicks or gameplay) in addition to the background music option",
       "reqIds": [],
       "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Replace the ending mini-game with one where the user draws/writes the name of an object/place/being and it transforms into a 3D interactive model the user can interact with",
+      "reqIds": [],
+      "status": "pending"
     }
   ],
-  "gameProjectType": "none",
+  "gameProjectType": "3d",
   "projectName": "Romantic slideshow website with 4-line shayari slides and a cute interactive teddy mini-game",
   "clarification_mode": "instant",
   "clarification_rounds": 0

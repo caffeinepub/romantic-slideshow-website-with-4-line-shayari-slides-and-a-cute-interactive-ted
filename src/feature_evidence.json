@@ -2,12 +2,11 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-add-optional-interactive-music-client-side-sound-effects-that-reacts-to-user-interactions-taps-clicks-and-slide-navigation-while-keeping-background-music-behavior-unchanged",
-      "featureTitle": "Add optional interactive music (client-side sound effects) that reacts to user interactions (taps/clicks and slide navigation) while keeping background music behavior unchanged.",
+      "featureId": "feature-replace-the-current-ending-mini-game-the-heart-collecting-endinggameslide-with-a-new-final-slide-experience-where-the-user-provides-the-name-of-an-object-place-or-being-and-the-scene-changes-to-a-corresponding-interactive-3d-model",
+      "featureTitle": "Replace the current ending mini-game (the heart-collecting EndingGameSlide) with a new final-slide experience where the user provides the name of an object, place, or being, and the scene changes to a corresponding interactive 3D model.",
       "files": [
-        "frontend/src/components/EndingGameSlide.tsx",
-        "frontend/src/components/Slideshow.tsx",
-        "frontend/src/lib/sfxEngine.ts"
+        "frontend/src/components/Ending3DModelSlide.tsx",
+        "frontend/src/components/Slideshow.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -17,17 +16,17 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-13"
+        "REQ-16"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-extend-the-existing-local-audio-settings-and-ui-controls-to-support-interactive-sound-effects-as-a-separately-configurable-option-on-off-that-is-off-by-default-and-persists-locally",
-      "featureTitle": "Extend the existing local audio settings and UI controls to support interactive sound effects as a separately configurable option (on/off) that is off by default and persists locally.",
+      "featureId": "feature-implement-the-new-ending-mini-game-as-a-dedicated-react-component-that-includes-1-a-simple-draw-the-name-area-freehand-canvas-and-2-a-text-input-that-drives-the-actual-selection-submitting-the-name-swaps-the-displayed-3d-model",
+      "featureTitle": "Implement the new ending mini-game as a dedicated React component that includes: (1) a simple “draw the name” area (freehand canvas) and (2) a text input that drives the actual selection; submitting the name swaps the displayed 3D model.",
       "files": [
-        "frontend/src/components/MusicControls.tsx",
-        "frontend/src/components/Slideshow.tsx",
-        "frontend/src/hooks/useLocalAudioSettings.ts"
+        "frontend/src/components/DrawNameCanvas.tsx",
+        "frontend/src/components/Ending3DModelSlide.tsx",
+        "frontend/src/hooks/useFreehandCanvas.ts"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -37,16 +36,16 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-14"
+        "REQ-17"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-make-the-ending-mini-game-s-sound-effects-feel-responsive-and-progressive-play-a-pleasant-short-sound-on-each-tap-that-varies-subtly-e-g-pitch-notes-and-play-a-distinct-completion-sound-when-the-goal-is-reached",
-      "featureTitle": "Make the ending mini-game’s sound effects feel responsive and progressive: play a pleasant, short sound on each tap that varies subtly (e.g., pitch/notes) and play a distinct completion sound when the goal is reached.",
+      "featureId": "feature-add-an-interactive-3d-viewer-on-the-final-slide-that-displays-the-selected-model-and-supports-user-interaction-rotate-orbit-zoom-and-pan-as-appropriate-for-desktop-and-touch",
+      "featureTitle": "Add an interactive 3D viewer on the final slide that displays the selected model and supports user interaction (rotate/orbit, zoom, and pan as appropriate for desktop and touch).",
       "files": [
-        "frontend/src/components/EndingGameSlide.tsx",
-        "frontend/src/lib/sfxEngine.ts"
+        "frontend/src/components/Ending3DModelSlide.tsx",
+        "frontend/src/components/ModelViewer3D.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -56,7 +55,45 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-15"
+        "REQ-18"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-define-a-fixed-offline-mapping-from-a-small-curated-set-of-supported-names-objects-places-beings-to-bundled-local-3d-model-assets-and-show-a-friendly-english-message-when-the-user-enters-an-unsupported-name",
+      "featureTitle": "Define a fixed, offline mapping from a small curated set of supported names (objects/places/beings) to bundled local 3D model assets, and show a friendly English message when the user enters an unsupported name.",
+      "files": [
+        "frontend/src/components/Ending3DModelSlide.tsx",
+        "frontend/src/lib/modelCatalog.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-19"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-integrate-the-new-ending-mini-game-with-the-existing-local-sound-effects-setting-so-interactions-submitting-a-name-model-swap-and-completion-style-moment-if-you-add-one-trigger-optional-sfx-while-preserving-the-current-background-music-behavior",
+      "featureTitle": "Integrate the new ending mini-game with the existing local Sound Effects setting so interactions (submitting a name, model swap, and completion-style moment if you add one) trigger optional SFX while preserving the current background music behavior.",
+      "files": [
+        "frontend/src/components/Ending3DModelSlide.tsx",
+        "frontend/src/components/Slideshow.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-20"
       ],
       "confidence": "high"
     }

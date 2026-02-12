@@ -1,79 +1,131 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Interactive sound effects reacting to navigation and ending mini-game taps",
+  "title": "Final slide draw/name-to-3D interactive model mini-game",
   "requirements": [
     {
-      "id": "REQ-13",
-      "summary": "Add optional client-side interactive sound effects for slide navigation and user interactions without changing existing background music behavior.",
+      "id": "REQ-16",
+      "summary": "Replace the current EndingGameSlide final mini-game with a new final-slide experience that accepts a typed name and swaps an interactive 3D model accordingly.",
       "acceptanceCriteria": [
-        "Interactive sound effects are present and clearly triggered by user interactions (at minimum: tapping in the ending mini-game, and using Next/Previous navigation).",
-        "Interactive sound effects do not start automatically without a user gesture (must comply with browser autoplay policies).",
-        "Background music playback (Tum Hi Ho), its toggle, and volume control continue to work as they do now."
+        "When the slideshow reaches the final slide, it renders the new 3D model mini-game instead of the existing heart-collecting EndingGameSlide.",
+        "The final slide contains an input flow that lets the user provide a name (object/place/being) and submit it to trigger a model change.",
+        "All user-facing text within the new mini-game is in English."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/lib/sfxEngine.ts",
+          "path": "frontend/src/components/Slideshow.tsx",
+          "operation": "modify",
+          "description": "Swap the last-slide render from EndingGameSlide to the new 3D model mini-game component while preserving existing slideshow navigation, swipe, indicator, and audio settings behavior."
+        },
+        {
+          "path": "frontend/src/components/Ending3DModelSlide.tsx",
           "operation": "create",
-          "description": "Implement a lightweight, client-only SFX engine (Web Audio API tone-based or equivalent) that lazily initializes on first user-gesture playback, supports short sounds for navigation/taps/completion, and accepts (enabled, volume) to ensure SFX never play when disabled and respect the existing volume setting."
-        },
-        {
-          "path": "frontend/src/components/Slideshow.tsx",
-          "operation": "modify",
-          "description": "Wire interactive SFX into Next/Previous navigation actions (button clicks and swipe-triggered navigation) by invoking the SFX engine only when the SFX setting is enabled; do not alter existing background music initialization, toggle, retry-on-gesture logic, or volume behavior."
-        },
-        {
-          "path": "frontend/src/components/EndingGameSlide.tsx",
-          "operation": "modify",
-          "description": "Trigger tap SFX from the existing tap/click handler in the ending mini-game using the shared SFX engine, ensuring sounds only occur as a direct result of user gestures and are gated by the SFX setting."
+          "description": "Create the new dedicated final-slide React component that hosts the draw area, the typed-name submission flow, English UI copy, and the interactive 3D viewer. Use shadcn-ui components (e.g., Button/Input/Card if available) for consistent UI; verify the component's usage instructions before implementing."
         }
       ]
     },
     {
-      "id": "REQ-14",
-      "summary": "Extend local audio settings and Music controls UI to include a separate, persisted Sound Effects toggle that is off by default and respects existing volume.",
+      "id": "REQ-17",
+      "summary": "Build the ending mini-game as a dedicated component with a freehand drawing canvas plus a typed-name input; allow clearing the canvas and swapping models repeatedly.",
       "acceptanceCriteria": [
-        "The Music controls UI includes a distinct toggle for interactive sound effects with English labeling (e.g., \"Sound Effects\"), and this setting persists via localStorage.",
-        "Sound effects are off by default for new users (no prior localStorage settings).",
-        "When sound effects are disabled, no interactive SFX play anywhere in the app.",
-        "Sound effects loudness respects the existing volume setting (or, if a separate SFX volume is added, it persists locally and has an English label)."
+        "A visible drawing canvas exists on the final slide where the user can draw/write the name (no automatic recognition required).",
+        "A text input (and submit button or equivalent) exists; submitting it changes the 3D model.",
+        "The UI clearly indicates that the typed name is what selects the model (English copy).",
+        "The user can reset/clear the drawing canvas and can change the name multiple times to swap models repeatedly."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/hooks/useLocalAudioSettings.ts",
+          "path": "frontend/src/components/Ending3DModelSlide.tsx",
           "operation": "modify",
-          "description": "Add a persisted local setting for interactive sound effects (e.g., sfxEnabled) that defaults to false when no localStorage value exists, and expose getters/setters alongside the existing background music enabled/volume settings."
+          "description": "Implement the input flow (typed name + submit), clear/reset actions, and clear English guidance that the typed name controls model selection. Use shadcn-ui Button/Input where appropriate; verify the component's usage instructions before implementing."
         },
         {
-          "path": "frontend/src/components/MusicControls.tsx",
-          "operation": "modify",
-          "description": "Add a distinct, English-labeled toggle control (e.g., \"Sound Effects\") bound to the new local SFX setting (off by default); compose existing UI patterns without editing files under frontend/src/components/ui. Verify the component's usage instructions before implementing."
+          "path": "frontend/src/components/DrawNameCanvas.tsx",
+          "operation": "create",
+          "description": "Create a reusable freehand canvas component supporting mouse and touch drawing and an imperative/prop-driven clear action; no handwriting recognition. Use shadcn-ui Button for clear/reset if needed; verify the component's usage instructions before implementing."
         },
         {
-          "path": "frontend/src/components/Slideshow.tsx",
-          "operation": "modify",
-          "description": "Consume the new SFX setting from useLocalAudioSettings and pass (sfxEnabled, volume) into the SFX engine calls so SFX are globally gated and loudness follows the existing volume."
+          "path": "frontend/src/hooks/useFreehandCanvas.ts",
+          "operation": "create",
+          "description": "Add a small hook to manage canvas drawing state and pointer/touch event handlers (draw, lift, clear) to keep the slide component lean."
         }
       ]
     },
     {
-      "id": "REQ-15",
-      "summary": "Make ending mini-game sound effects responsive and progressive with subtle variation per tap and a distinct one-time completion sound.",
+      "id": "REQ-18",
+      "summary": "Add an interactive 3D viewer to the final slide that renders the selected local model and supports orbit/rotate and zoom (and pan where appropriate) across desktop and touch.",
       "acceptanceCriteria": [
-        "Each valid tap in the EndingGameSlide triggers a short sound effect; consecutive taps vary subtly so the audio feels interactive rather than repetitive.",
-        "When the completion state is reached, a distinct completion sound effect plays once.",
-        "No sound effects are triggered when the game is complete and the user taps (unless they press \"Play Again\")."
+        "A 3D model is rendered on the final slide and is visibly interactive via pointer/touch gestures (at minimum: rotate/orbit; ideally: zoom).",
+        "The 3D model updates immediately after a new valid name is submitted.",
+        "The 3D viewer remains usable across common viewport sizes (mobile and desktop) without overflowing the slide container."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/lib/sfxEngine.ts",
-          "operation": "modify",
-          "description": "Add progressive tap SFX support with subtle variation (e.g., cycling/picking from a small set of notes without immediate repeats, light pitch variation) and a distinct completion sound; ensure completion sound is designed to be triggered once per completion."
+          "path": "frontend/src/components/ModelViewer3D.tsx",
+          "operation": "create",
+          "description": "Implement a 3D viewer component (3D game-style interaction is not required; ensure this is an interactive 3D viewer) that loads a local bundled model file, renders it in a canvas, and provides orbit/rotate + zoom (and optional pan) for mouse and touch. Ensure the viewer resizes to its container and does not overflow."
         },
         {
-          "path": "frontend/src/components/EndingGameSlide.tsx",
+          "path": "frontend/src/components/Ending3DModelSlide.tsx",
           "operation": "modify",
-          "description": "Invoke the tap SFX for each valid tap while the game is not complete; trigger the distinct completion SFX exactly once when the completion state is reached; ensure taps after completion do not play SFX, and that \"Play Again\" reset re-enables tap SFX behavior for the next run. (Continue using the existing shadcn-ui Button without modifying frontend/src/components/ui). Verify the component's usage instructions before implementing."
+          "description": "Wire the selected model from the typed-name flow into ModelViewer3D so submitting a supported name swaps the displayed model immediately, and ensure layout remains responsive within the slide container."
+        }
+      ]
+    },
+    {
+      "id": "REQ-19",
+      "summary": "Create a fixed offline mapping from supported names (case-insensitive, with aliases) to bundled local 3D model assets and show a friendly message with suggestions for unsupported names.",
+      "acceptanceCriteria": [
+        "There is a deterministic mapping from multiple input strings (case-insensitive) to specific local 3D model assets (e.g., synonyms/aliases like “rose” and “flower” can map to the same model).",
+        "Entering an unsupported name does not crash; the UI shows an English message such as “I don’t know that one yet—try: …” and suggests the supported names.",
+        "All 3D model assets used by the mapping are loaded from the frontend’s static assets (no backend serving, no external API calls)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/lib/modelCatalog.ts",
+          "operation": "create",
+          "description": "Define a curated, deterministic mapping from normalized input strings/aliases to local 3D model asset paths plus display labels, and export helpers for normalization and supported-name suggestions."
+        },
+        {
+          "path": "frontend/src/components/Ending3DModelSlide.tsx",
+          "operation": "modify",
+          "description": "Use the fixed offline mapping to resolve typed names (case-insensitive, aliases supported), display a friendly English unsupported-name message with suggested supported names, and prevent crashes on invalid input."
+        },
+        {
+          "path": "frontend/public/assets/models/rose.glb",
+          "operation": "create",
+          "description": "Add a bundled local 3D model asset used by the offline name mapping (e.g., for \"rose\"/\"flower\")."
+        },
+        {
+          "path": "frontend/public/assets/models/teddy.glb",
+          "operation": "create",
+          "description": "Add a bundled local 3D model asset used by the offline name mapping (e.g., for \"teddy\"/\"bear\")."
+        },
+        {
+          "path": "frontend/public/assets/models/castle.glb",
+          "operation": "create",
+          "description": "Add a bundled local 3D model asset used by the offline name mapping (e.g., for \"castle\"/\"palace\")."
+        }
+      ]
+    },
+    {
+      "id": "REQ-20",
+      "summary": "Integrate the new ending mini-game with the existing Sound Effects toggle so key interactions play optional SFX without altering background music behavior.",
+      "acceptanceCriteria": [
+        "If Sound Effects are OFF, the new mini-game produces no SFX.",
+        "If Sound Effects are ON, at least one short SFX plays on key interactions (e.g., submit/model swap), using the existing client-side SFX engine.",
+        "Background music remains optional and off-by-default, controlled only by the existing music settings UI."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Slideshow.tsx",
+          "operation": "modify",
+          "description": "Continue passing the existing local audio settings (sfxEnabled, volume) into the final-slide component so SFX behavior remains consistent with the current settings and background music remains unchanged."
+        },
+        {
+          "path": "frontend/src/components/Ending3DModelSlide.tsx",
+          "operation": "modify",
+          "description": "Trigger existing client-side SFX (via the current sfxEngine) on key interactions such as submit/model swap and any optional completion-style moment, gated by sfxEnabled and respecting volume (no SFX when disabled)."
         }
       ]
     }

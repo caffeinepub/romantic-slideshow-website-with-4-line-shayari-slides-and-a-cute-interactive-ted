@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight, Music } from 'lucide-react';
 import { shayariCollection } from '../data/shayari';
 import { ShayariSlide } from './ShayariSlide';
 import { SlideIndicator } from './SlideIndicator';
-import { EndingGameSlide } from './EndingGameSlide';
+import { Ending3DModelSlide } from './Ending3DModelSlide';
 import { MusicControls } from './MusicControls';
 import { useSwipeNavigation } from '../hooks/useSwipeNavigation';
 import { useLocalAudioSettings } from '../hooks/useLocalAudioSettings';
@@ -15,7 +15,7 @@ const backgrounds = [
 ];
 
 export function Slideshow() {
-  const totalSlides = shayariCollection.length + 1; // +1 for ending game
+  const totalSlides = shayariCollection.length + 1; // +1 for ending 3D model game
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showMusicControls, setShowMusicControls] = useState(false);
   const [needsUserGesture, setNeedsUserGesture] = useState(false);
@@ -116,7 +116,7 @@ export function Slideshow() {
             backgroundImage={backgrounds[currentSlide % backgrounds.length]}
           />
         ) : (
-          <EndingGameSlide sfxEnabled={sfxEnabled} volume={volume} />
+          <Ending3DModelSlide sfxEnabled={sfxEnabled} volume={volume} />
         )}
       </div>
 

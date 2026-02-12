@@ -1,56 +1,83 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-12T21:46:54.430Z",
+  "generatedAt": "2026-02-12T21:55:39.249Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 3,
-    "implemented": 3,
+    "total": 5,
+    "implemented": 5,
     "items": [
       {
-        "id": "REQ-13",
-        "summary": "Add optional interactive music (client-side sound effects) that reacts to user interactions (taps/clicks and slide navigation) while keeping background music behavior unchanged.",
+        "id": "REQ-16",
+        "summary": "Replace the current ending mini-game (the heart-collecting EndingGameSlide) with a new final-slide experience where the user provides the name of an object, place, or being, and the scene changes to a corresponding interactive 3D model.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/lib/sfxEngine.ts",
           "frontend/src/components/Slideshow.tsx",
-          "frontend/src/components/EndingGameSlide.tsx"
+          "frontend/src/components/Ending3DModelSlide.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/lib/sfxEngine.ts",
           "frontend/src/components/Slideshow.tsx",
-          "frontend/src/components/EndingGameSlide.tsx"
+          "frontend/src/components/Ending3DModelSlide.tsx"
         ]
       },
       {
-        "id": "REQ-14",
-        "summary": "Extend the existing local audio settings and UI controls to support interactive sound effects as a separately configurable option (on/off) that is off by default and persists locally.",
+        "id": "REQ-17",
+        "summary": "Implement the new ending mini-game as a dedicated React component that includes: (1) a simple “draw the name” area (freehand canvas) and (2) a text input that drives the actual selection; submitting the name swaps the displayed 3D model.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/hooks/useLocalAudioSettings.ts",
-          "frontend/src/components/MusicControls.tsx",
-          "frontend/src/components/Slideshow.tsx"
+          "frontend/src/components/Ending3DModelSlide.tsx",
+          "frontend/src/components/DrawNameCanvas.tsx",
+          "frontend/src/hooks/useFreehandCanvas.ts"
         ],
         "matchedFiles": [
-          "frontend/src/hooks/useLocalAudioSettings.ts",
-          "frontend/src/components/MusicControls.tsx",
-          "frontend/src/components/Slideshow.tsx"
+          "frontend/src/components/Ending3DModelSlide.tsx",
+          "frontend/src/components/DrawNameCanvas.tsx",
+          "frontend/src/hooks/useFreehandCanvas.ts"
         ]
       },
       {
-        "id": "REQ-15",
-        "summary": "Make the ending mini-game’s sound effects feel responsive and progressive: play a pleasant, short sound on each tap that varies subtly (e.g., pitch/notes) and play a distinct completion sound when the goal is reached.",
+        "id": "REQ-18",
+        "summary": "Add an interactive 3D viewer on the final slide that displays the selected model and supports user interaction (rotate/orbit, zoom, and pan as appropriate for desktop and touch).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/lib/sfxEngine.ts",
-          "frontend/src/components/EndingGameSlide.tsx"
+          "frontend/src/components/ModelViewer3D.tsx",
+          "frontend/src/components/Ending3DModelSlide.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/lib/sfxEngine.ts",
-          "frontend/src/components/EndingGameSlide.tsx"
+          "frontend/src/components/ModelViewer3D.tsx",
+          "frontend/src/components/Ending3DModelSlide.tsx"
+        ]
+      },
+      {
+        "id": "REQ-19",
+        "summary": "Define a fixed, offline mapping from a small curated set of supported names (objects/places/beings) to bundled local 3D model assets, and show a friendly English message when the user enters an unsupported name.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/lib/modelCatalog.ts",
+          "frontend/src/components/Ending3DModelSlide.tsx",
+          "frontend/public/assets/models/rose.glb",
+          "frontend/public/assets/models/teddy.glb",
+          "frontend/public/assets/models/castle.glb"
+        ],
+        "matchedFiles": [
+          "frontend/src/lib/modelCatalog.ts",
+          "frontend/src/components/Ending3DModelSlide.tsx"
+        ]
+      },
+      {
+        "id": "REQ-20",
+        "summary": "Integrate the new ending mini-game with the existing local Sound Effects setting so interactions (submitting a name, model swap, and completion-style moment if you add one) trigger optional SFX while preserving the current background music behavior.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/Slideshow.tsx",
+          "frontend/src/components/Ending3DModelSlide.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/Slideshow.tsx",
+          "frontend/src/components/Ending3DModelSlide.tsx"
         ]
       }
     ]
@@ -60,11 +87,13 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
+    "frontend/src/components/DrawNameCanvas.tsx",
+    "frontend/src/components/Ending3DModelSlide.tsx",
     "frontend/src/components/EndingGameSlide.tsx",
-    "frontend/src/components/MusicControls.tsx",
+    "frontend/src/components/ModelViewer3D.tsx",
     "frontend/src/components/Slideshow.tsx",
-    "frontend/src/hooks/useLocalAudioSettings.ts",
-    "frontend/src/lib/sfxEngine.ts",
+    "frontend/src/hooks/useFreehandCanvas.ts",
+    "frontend/src/lib/modelCatalog.ts",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

@@ -1,73 +1,101 @@
 {
   "kind": "build_request",
-  "title": "Add interactive music (sound effects) that reacts to user interactions",
+  "title": "Replace ending mini-game with a draw/name-to-3D interactive model experience",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-13",
-      "text": "Add optional interactive music (client-side sound effects) that reacts to user interactions (taps/clicks and slide navigation) while keeping background music behavior unchanged.",
+      "id": "REQ-16",
+      "text": "Replace the current ending mini-game (the heart-collecting EndingGameSlide) with a new final-slide experience where the user provides the name of an object, place, or being, and the scene changes to a corresponding interactive 3D model.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-user-1"
+          "msg-4"
         ],
         "quotes": [
-          "ADD INTERACTIVE MUSIC TOO"
+          "CHANGE LAST GAME WITH A NEW ONE IN WHICH IF WE DRAW A NAME OF AN OBJECT PLACE OR BEING IT CHANGES TO 3D INTERACTIVE MODEL"
         ]
       },
       "acceptanceCriteria": [
-        "Interactive sound effects are present and clearly triggered by user interactions (at minimum: tapping in the ending mini-game, and using Next/Previous navigation).",
-        "Interactive sound effects do not start automatically without a user gesture (must comply with browser autoplay policies).",
-        "Background music playback (Tum Hi Ho), its toggle, and volume control continue to work as they do now."
+        "When the slideshow reaches the final slide, it renders the new 3D model mini-game instead of the existing heart-collecting EndingGameSlide.",
+        "The final slide contains an input flow that lets the user provide a name (object/place/being) and submit it to trigger a model change.",
+        "All user-facing text within the new mini-game is in English."
       ]
     },
     {
-      "id": "REQ-14",
-      "text": "Extend the existing local audio settings and UI controls to support interactive sound effects as a separately configurable option (on/off) that is off by default and persists locally.",
+      "id": "REQ-17",
+      "text": "Implement the new ending mini-game as a dedicated React component that includes: (1) a simple “draw the name” area (freehand canvas) and (2) a text input that drives the actual selection; submitting the name swaps the displayed 3D model.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-user-1"
+          "msg-4"
         ],
         "quotes": [
-          "ADD INTERACTIVE MUSIC TOO"
+          "IF WE DRAW A NAME OF AN OBJECT PLACE OR BEING IT CHANGES TO 3D INTERACTIVE MODEL"
         ]
       },
       "acceptanceCriteria": [
-        "The Music controls UI includes a distinct toggle for interactive sound effects with English labeling (e.g., \"Sound Effects\"), and this setting persists via localStorage.",
-        "Sound effects are off by default for new users (no prior localStorage settings).",
-        "When sound effects are disabled, no interactive SFX play anywhere in the app.",
-        "Sound effects loudness respects the existing volume setting (or, if a separate SFX volume is added, it persists locally and has an English label)."
+        "A visible drawing canvas exists on the final slide where the user can draw/write the name (no automatic recognition required).",
+        "A text input (and submit button or equivalent) exists; submitting it changes the 3D model.",
+        "The UI clearly indicates that the typed name is what selects the model (English copy).",
+        "The user can reset/clear the drawing canvas and can change the name multiple times to swap models repeatedly."
       ]
     },
     {
-      "id": "REQ-15",
-      "text": "Make the ending mini-game’s sound effects feel responsive and progressive: play a pleasant, short sound on each tap that varies subtly (e.g., pitch/notes) and play a distinct completion sound when the goal is reached.",
+      "id": "REQ-18",
+      "text": "Add an interactive 3D viewer on the final slide that displays the selected model and supports user interaction (rotate/orbit, zoom, and pan as appropriate for desktop and touch).",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-user-1"
-        ],
-        "quotes": [
-          "ADD INTERACTIVE MUSIC TOO"
+          "msg-4"
         ]
       },
       "acceptanceCriteria": [
-        "Each valid tap in the EndingGameSlide triggers a short sound effect; consecutive taps vary subtly so the audio feels interactive rather than repetitive.",
-        "When the completion state is reached, a distinct completion sound effect plays once.",
-        "No sound effects are triggered when the game is complete and the user taps (unless they press \"Play Again\")."
+        "A 3D model is rendered on the final slide and is visibly interactive via pointer/touch gestures (at minimum: rotate/orbit; ideally: zoom).",
+        "The 3D model updates immediately after a new valid name is submitted.",
+        "The 3D viewer remains usable across common viewport sizes (mobile and desktop) without overflowing the slide container."
+      ]
+    },
+    {
+      "id": "REQ-19",
+      "text": "Define a fixed, offline mapping from a small curated set of supported names (objects/places/beings) to bundled local 3D model assets, and show a friendly English message when the user enters an unsupported name.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ]
+      },
+      "acceptanceCriteria": [
+        "There is a deterministic mapping from multiple input strings (case-insensitive) to specific local 3D model assets (e.g., synonyms/aliases like “rose” and “flower” can map to the same model).",
+        "Entering an unsupported name does not crash; the UI shows an English message such as “I don’t know that one yet—try: …” and suggests the supported names.",
+        "All 3D model assets used by the mapping are loaded from the frontend’s static assets (no backend serving, no external API calls)."
+      ]
+    },
+    {
+      "id": "REQ-20",
+      "text": "Integrate the new ending mini-game with the existing local Sound Effects setting so interactions (submitting a name, model swap, and completion-style moment if you add one) trigger optional SFX while preserving the current background music behavior.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ]
+      },
+      "acceptanceCriteria": [
+        "If Sound Effects are OFF, the new mini-game produces no SFX.",
+        "If Sound Effects are ON, at least one short SFX plays on key interactions (e.g., submit/model swap), using the existing client-side SFX engine.",
+        "Background music remains optional and off-by-default, controlled only by the existing music settings UI."
       ]
     }
   ],
   "constraints": [
-    "Do not edit files under frontend/src/components/ui (compose existing UI components instead).",
-    "Do not modify any frontend immutable paths listed in SYSTEM_CONTEXT.",
-    "Do not add new backend canisters/services; keep all changes within the existing React frontend and optional static assets."
+    "Do not modify files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui; compose existing UI components instead.",
+    "Do not add external APIs/services for model generation or handwriting recognition; the model selection must work offline with bundled assets.",
+    "Keep the app as a single-canister Motoko backend; no new backend service is required for this feature.",
+    "Preserve existing slideshow navigation behavior (buttons, swipe, and slide indicator) and existing music/SFX settings behavior (music and SFX off by default, persisted locally)."
   ],
   "nonGoals": [
-    "Do not change the shayari content or slide count.",
-    "Do not add third-party audio/streaming services or external APIs.",
-    "Do not introduce real-time networking features (e.g., WebSockets)."
+    "Generating new 3D models from arbitrary text using AI/LLM or any third-party model-generation service.",
+    "Implementing real handwriting-to-text recognition for the drawing canvas.",
+    "Adding user accounts or saving user-created drawings/models to the backend."
   ],
   "imageRequirements": {
     "required": [],

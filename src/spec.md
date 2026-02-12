@@ -1,11 +1,13 @@
 # Specification
 
 ## Summary
-**Goal:** Add optional, user-gesture-triggered interactive sound effects that respond to navigation and ending mini-game interactions, without changing existing background music behavior.
+**Goal:** Replace the final heart-collecting ending slide with an offline, interactive 3D model experience driven by a user-entered name plus an optional drawing area.
 
 **Planned changes:**
-- Add a client-side sound effects (SFX) system that plays short sounds on user interactions (Next/Previous navigation and ending mini-game taps) and never auto-plays without a user gesture.
-- Extend the existing Music controls to include a separate English-labeled toggle for “Sound Effects” that is off by default and persists via localStorage.
-- Make EndingGameSlide SFX responsive and progressive: subtle variation on each valid tap and a distinct one-time completion sound when the goal is reached, with no further SFX after completion until “Play Again”.
+- Remove/disable the current heart-collecting EndingGameSlide on the final slide and render a new dedicated ending component instead.
+- Add a final-slide UI that includes (1) a freehand drawing canvas for writing/drawing the name and (2) a text input + submit action that controls model selection (English UI text).
+- Add an interactive 3D viewer on the final slide that supports user interaction (at minimum rotate/orbit; ideally zoom) and stays within the slide layout on mobile/desktop.
+- Implement a fixed, offline, case-insensitive mapping from a small curated set of supported names (including aliases) to bundled local 3D model assets; show a friendly English message with suggestions for unsupported names.
+- Integrate with the existing Sound Effects setting so key interactions (submit/model swap) optionally play SFX while preserving current background music behavior (optional, off-by-default).
 
-**User-visible outcome:** Users can enable “Sound Effects” to hear responsive interaction sounds during navigation and the ending mini-game, while background music, its toggle, and volume control continue to work as before.
+**User-visible outcome:** On the final slide, the user can draw/write a name on a canvas, type the name into an input, submit it, and immediately see and interact with the corresponding 3D model; unsupported names show a helpful English prompt with suggested options, and SFX respect the existing setting.
