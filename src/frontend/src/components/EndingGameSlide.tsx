@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Sparkles, RotateCcw } from 'lucide-react';
+import { sfxEngine } from '../lib/sfxEngine';
 
 interface Heart {
   id: number;
@@ -19,13 +20,19 @@ const COMPLETION_MESSAGES = [
   "Love is in the air! 🥰",
 ];
 
-export function EndingGameSlide() {
+interface EndingGameSlideProps {
+  sfxEnabled: boolean;
+  volume: number;
+}
+
+export function EndingGameSlide({ sfxEnabled, volume }: EndingGameSlideProps) {
   const [hearts, setHearts] = useState<Heart[]>([]);
   const [score, setScore] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
   const [completionMessage, setCompletionMessage] = useState('');
   const heartIdRef = useRef(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const completionSoundPlayedRef = useRef(false);
 
   useEffect(() => {
     if (score >= GOAL && !isComplete) {
@@ -33,8 +40,14 @@ export function EndingGameSlide() {
       setCompletionMessage(
         COMPLETION_MESSAGES[Math.floor(Math.random() * COMPLETION_MESSAGES.length)]
       );
+      
+      // Play completion sound once
+      if (!completionSoundPlayedRef.current) {
+        sfxEngine.playCompletion(sfxEnabled, volume);
+        completionSoundPlayedRef.current = true;
+      }
     }
-  }, [score, isComplete]);
+  }, [score, isComplete, sfxEnabled, volume]);
 
   const handleInteraction = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
     if (isComplete) return;
@@ -77,6 +90,9 @@ export function EndingGameSlide() {
     setHearts((prev) => [...prev, ...newHearts]);
     setScore((prev) => prev + heartCount);
 
+    // Play tap SFX
+    sfxEngine.playTap(sfxEnabled, volume);
+
     // Remove hearts after animation completes
     setTimeout(() => {
       setHearts((prev) => prev.filter((h) => !newHearts.find((nh) => nh.id === h.id)));
@@ -88,6 +104,7 @@ export function EndingGameSlide() {
     setScore(0);
     setIsComplete(false);
     setCompletionMessage('');
+    completionSoundPlayedRef.current = false;
   };
 
   const progress = Math.min((score / GOAL) * 100, 100);

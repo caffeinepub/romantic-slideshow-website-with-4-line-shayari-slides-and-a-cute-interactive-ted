@@ -1,88 +1,76 @@
 {
   "kind": "build_request",
-  "title": "Replace the final Teddy mini-game with a new beautiful interactive ending game",
+  "title": "Add interactive music (sound effects) that reacts to user interactions",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-10",
-      "text": "Replace the current final-slide mini-game (the teddy mini-game) with a different beautiful interactive mini-game on the ending slide, so the teddy is no longer shown as the final experience.",
+      "id": "REQ-13",
+      "text": "Add optional interactive music (client-side sound effects) that reacts to user interactions (taps/clicks and slide navigation) while keeping background music behavior unchanged.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-user-1"
         ],
         "quotes": [
-          "change the teddy game to another beautiful game"
+          "ADD INTERACTIVE MUSIC TOO"
         ]
       },
       "acceptanceCriteria": [
-        "When navigating to the last slide, the teddy artwork and teddy interactions are not shown.",
-        "The last slide shows a new interactive mini-game that is visually polished and consistent with the existing romantic theme.",
-        "The new mini-game works on both desktop (mouse) and mobile (touch)."
+        "Interactive sound effects are present and clearly triggered by user interactions (at minimum: tapping in the ending mini-game, and using Next/Previous navigation).",
+        "Interactive sound effects do not start automatically without a user gesture (must comply with browser autoplay policies).",
+        "Background music playback (Tum Hi Ho), its toggle, and volume control continue to work as they do now."
       ]
     },
     {
-      "id": "REQ-11",
-      "text": "Implement the new ending mini-game as a dedicated React component and wire it into the slideshow so it renders as the final slide in place of TeddyGameSlide.",
+      "id": "REQ-14",
+      "text": "Extend the existing local audio settings and UI controls to support interactive sound effects as a separately configurable option (on/off) that is off by default and persists locally.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-user-1"
         ],
         "quotes": [
-          "change the teddy game to another beautiful game"
+          "ADD INTERACTIVE MUSIC TOO"
         ]
       },
       "acceptanceCriteria": [
-        "A new component exists for the ending game (separate from TeddyGameSlide).",
-        "frontend/src/components/Slideshow.tsx renders the new ending-game component for the last slide instead of TeddyGameSlide.",
-        "Slide count, navigation buttons, swipe navigation, slide indicator, and music controls continue to work exactly as before."
+        "The Music controls UI includes a distinct toggle for interactive sound effects with English labeling (e.g., \"Sound Effects\"), and this setting persists via localStorage.",
+        "Sound effects are off by default for new users (no prior localStorage settings).",
+        "When sound effects are disabled, no interactive SFX play anywhere in the app.",
+        "Sound effects loudness respects the existing volume setting (or, if a separate SFX volume is added, it persists locally and has an English label)."
       ]
     },
     {
-      "id": "REQ-12",
-      "text": "Design the new ending mini-game to feel like a 'beautiful' romantic interaction (e.g., a tap/click-driven visual effect game with progression and a clear end state), and ensure all user-facing text shown within the new game is in English.",
+      "id": "REQ-15",
+      "text": "Make the ending mini-game’s sound effects feel responsive and progressive: play a pleasant, short sound on each tap that varies subtly (e.g., pitch/notes) and play a distinct completion sound when the goal is reached.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-user-1"
         ],
         "quotes": [
-          "change the teddy game to another beautiful game"
+          "ADD INTERACTIVE MUSIC TOO"
         ]
       },
       "acceptanceCriteria": [
-        "The new game includes clear on-screen instructions in English.",
-        "The game provides immediate visual feedback for each interaction (tap/click/drag).",
-        "The game has a simple progression (e.g., accumulating a count/collecting items) and an end state (e.g., a completion moment with a replay/reset option)."
+        "Each valid tap in the EndingGameSlide triggers a short sound effect; consecutive taps vary subtly so the audio feels interactive rather than repetitive.",
+        "When the completion state is reached, a distinct completion sound effect plays once.",
+        "No sound effects are triggered when the game is complete and the user taps (unless they press \"Play Again\")."
       ]
     }
   ],
   "constraints": [
-    "Do not modify files under frontend/src/components/ui (read-only).",
-    "Do not edit the immutable hook files listed in SYSTEM_CONTEXT.",
-    "Keep the existing slideshow flow (shayari slides first, ending mini-game as the last slide), navigation controls, swipe navigation, slide indicator, and optional/off-by-default background music behavior intact.",
-    "Backend remains a single Motoko actor; no backend changes are required for this request."
+    "Do not edit files under frontend/src/components/ui (compose existing UI components instead).",
+    "Do not modify any frontend immutable paths listed in SYSTEM_CONTEXT.",
+    "Do not add new backend canisters/services; keep all changes within the existing React frontend and optional static assets."
   ],
   "nonGoals": [
-    "Adding new authentication or requiring login for the ending game.",
-    "Adding backend persistence, leaderboards, or user accounts for the mini-game.",
-    "Changing the existing shayari content, number of shayari slides, or the music controls behavior."
+    "Do not change the shayari content or slide count.",
+    "Do not add third-party audio/streaming services or external APIs.",
+    "Do not introduce real-time networking features (e.g., WebSockets)."
   ],
   "imageRequirements": {
     "required": [],
     "edits": []
-  },
-  "userProfileUpdate": {
-    "goalsToAdd": [],
-    "goalsToRemove": [],
-    "preferencesToAdd": [
-      "Use English for any user-facing text in the app."
-    ],
-    "preferencesToRemove": [],
-    "miscToAdd": [],
-    "miscToRemove": [],
-    "fieldsToSet": {},
-    "fieldsToDelete": []
   }
 }

@@ -1,7 +1,7 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-12T21:33:54.918Z",
+  "generatedAt": "2026-02-12T21:46:54.430Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
@@ -11,40 +11,46 @@
     "implemented": 3,
     "items": [
       {
-        "id": "REQ-10",
-        "summary": "Replace the current final-slide mini-game (the teddy mini-game) with a different beautiful interactive mini-game on the ending slide, so the teddy is no longer shown as the final experience.",
+        "id": "REQ-13",
+        "summary": "Add optional interactive music (client-side sound effects) that reacts to user interactions (taps/clicks and slide navigation) while keeping background music behavior unchanged.",
         "status": "implemented",
         "plannedFiles": [
+          "frontend/src/lib/sfxEngine.ts",
+          "frontend/src/components/Slideshow.tsx",
+          "frontend/src/components/EndingGameSlide.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/lib/sfxEngine.ts",
+          "frontend/src/components/Slideshow.tsx",
+          "frontend/src/components/EndingGameSlide.tsx"
+        ]
+      },
+      {
+        "id": "REQ-14",
+        "summary": "Extend the existing local audio settings and UI controls to support interactive sound effects as a separately configurable option (on/off) that is off by default and persists locally.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useLocalAudioSettings.ts",
+          "frontend/src/components/MusicControls.tsx",
           "frontend/src/components/Slideshow.tsx"
         ],
         "matchedFiles": [
+          "frontend/src/hooks/useLocalAudioSettings.ts",
+          "frontend/src/components/MusicControls.tsx",
           "frontend/src/components/Slideshow.tsx"
         ]
       },
       {
-        "id": "REQ-11",
-        "summary": "Implement the new ending mini-game as a dedicated React component and wire it into the slideshow so it renders as the final slide in place of TeddyGameSlide.",
+        "id": "REQ-15",
+        "summary": "Make the ending mini-game’s sound effects feel responsive and progressive: play a pleasant, short sound on each tap that varies subtly (e.g., pitch/notes) and play a distinct completion sound when the goal is reached.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/EndingGameSlide.tsx",
-          "frontend/src/components/Slideshow.tsx"
+          "frontend/src/lib/sfxEngine.ts",
+          "frontend/src/components/EndingGameSlide.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/EndingGameSlide.tsx",
-          "frontend/src/components/Slideshow.tsx"
-        ]
-      },
-      {
-        "id": "REQ-12",
-        "summary": "Design the new ending mini-game to feel like a 'beautiful' romantic interaction (e.g., a tap/click-driven visual effect game with progression and a clear end state), and ensure all user-facing text shown within the new game is in English.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/EndingGameSlide.tsx",
-          "frontend/src/index.css"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/EndingGameSlide.tsx",
-          "frontend/src/index.css"
+          "frontend/src/lib/sfxEngine.ts",
+          "frontend/src/components/EndingGameSlide.tsx"
         ]
       }
     ]
@@ -55,9 +61,10 @@
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
     "frontend/src/components/EndingGameSlide.tsx",
+    "frontend/src/components/MusicControls.tsx",
     "frontend/src/components/Slideshow.tsx",
-    "frontend/src/components/TeddyGameSlide.tsx",
-    "frontend/src/index.css",
+    "frontend/src/hooks/useLocalAudioSettings.ts",
+    "frontend/src/lib/sfxEngine.ts",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

@@ -4,14 +4,15 @@
   "frontend/src/components/ShayariSlide.tsx": "Presentational component that renders a single shayari slide with background image, glassmorphic card, and animated 4-line text display.",
   "frontend/src/components/SlideIndicator.tsx": "UI component displaying current slide position with animated dots and numeric counter (e.g., \"3 / 8\").",
   "frontend/src/components/TeddyGameSlide.tsx": "Interactive teddy mini-game with layered rendering (body + separate hand layers), distinct hand hotspots that trigger wave animations, voice lines via Web Speech API, facial expressions, and particle effects for both body and hand interactions.",
-  "frontend/src/components/Slideshow.tsx": "Main slideshow container managing slide state, navigation, music controls with \"Tum Hi Ho\" track, autoplay fallback handling, and rendering shayari slides plus the final EndingGameSlide (replacing TeddyGameSlide).",
-  "frontend/src/components/MusicControls.tsx": "Music settings UI with toggle switch and volume slider using localStorage-backed audio settings.",
+  "frontend/src/components/Slideshow.tsx": "Main slideshow container managing slide state, navigation with SFX on slide changes, music controls with \"Tum Hi Ho\" track, autoplay fallback handling, and rendering shayari slides plus the final EndingGameSlide with SFX support.",
+  "frontend/src/components/MusicControls.tsx": "Music settings UI with toggle switches for both background music and sound effects, plus a shared volume slider, all using localStorage-backed audio settings.",
   "frontend/src/hooks/useSwipeNavigation.ts": "Custom hook implementing touch-based swipe navigation with configurable threshold for slide transitions, now accepting RefObject<HTMLElement | null> to fix TypeScript compatibility.",
-  "frontend/src/hooks/useLocalAudioSettings.ts": "Custom hook managing music enabled/disabled state and volume in localStorage, defaulting to OFF.",
+  "frontend/src/hooks/useLocalAudioSettings.ts": "Custom hook managing music enabled/disabled state, volume, and sound effects toggle (off by default) in localStorage with getters and setters for all three settings.",
   "frontend/src/lib/randomNoRepeat.ts": "Utility function that returns a random item selector avoiding immediate repetition of the previous selection.",
   "frontend/src/hooks/useQueries.ts": "Placeholder file for React Query hooks (minimal as backend has no methods).",
   "frontend/src/index.css": "Global styles with romantic OKLCH color palette and custom animations including heart-float, heart-beat, sparkle-float, scale-in, and pulse-slow for the new ending game interactions.",
   "frontend/tailwind.config.js": "Tailwind configuration extended with romantic color tokens, serif font family (Georgia), and custom theme utilities.",
   "frontend/src/lib/speak.ts": "Client-side text-to-speech helper using Web Speech API with feature detection, utterance management, and customizable voice options (pitch, rate, volume).",
-  "frontend/src/components/EndingGameSlide.tsx": "Interactive heart collector game where users tap/click to spawn animated hearts, track progress toward a 50-heart goal, and see a completion screen with replay functionality; supports both mouse and touch interactions with romantic visual feedback."
+  "frontend/src/components/EndingGameSlide.tsx": "Interactive heart collector game where users tap/click to spawn animated hearts with tap sound effects, track progress toward a 50-heart goal with a distinct completion sound, and see a completion screen with replay functionality.",
+  "frontend/src/lib/sfxEngine.ts": "Lightweight Web Audio API-based SFX engine that lazily initializes on first playback, providing navigation sounds, progressive tap sounds with subtle variation, and a distinct completion sound effect."
 }

@@ -2,12 +2,12 @@ import { Volume2, VolumeX } from 'lucide-react';
 import { useLocalAudioSettings } from '../hooks/useLocalAudioSettings';
 
 export function MusicControls() {
-  const { isEnabled, volume, setIsEnabled, setVolume } = useLocalAudioSettings();
+  const { isEnabled, volume, sfxEnabled, setIsEnabled, setVolume, setSfxEnabled } = useLocalAudioSettings();
 
   return (
     <div className="bg-white/90 dark:bg-black/80 backdrop-blur-md rounded-2xl p-4 shadow-xl border border-white/20 min-w-[200px]">
       <div className="space-y-4">
-        {/* Toggle Switch */}
+        {/* Music Toggle Switch */}
         <div className="flex items-center justify-between">
           <span className="text-sm font-medium text-foreground">Music</span>
           <button
@@ -21,6 +21,25 @@ export function MusicControls() {
             <span
               className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
                 isEnabled ? 'translate-x-6' : 'translate-x-1'
+              }`}
+            />
+          </button>
+        </div>
+
+        {/* Sound Effects Toggle Switch */}
+        <div className="flex items-center justify-between">
+          <span className="text-sm font-medium text-foreground">Sound Effects</span>
+          <button
+            onClick={() => setSfxEnabled(!sfxEnabled)}
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+              sfxEnabled ? 'bg-romantic-primary' : 'bg-gray-300 dark:bg-gray-600'
+            }`}
+            role="switch"
+            aria-checked={sfxEnabled}
+          >
+            <span
+              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                sfxEnabled ? 'translate-x-6' : 'translate-x-1'
               }`}
             />
           </button>
@@ -45,8 +64,7 @@ export function MusicControls() {
               step="0.01"
               value={volume}
               onChange={(e) => setVolume(parseFloat(e.target.value))}
-              disabled={!isEnabled}
-              className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed slider-thumb"
+              className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer slider-thumb"
             />
           </div>
         </div>

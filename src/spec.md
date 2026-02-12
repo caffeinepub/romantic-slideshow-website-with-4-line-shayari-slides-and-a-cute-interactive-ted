@@ -1,11 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Replace the final Teddy mini-game with a new, beautiful romantic-themed interactive ending mini-game as the last slide.
+**Goal:** Add optional, user-gesture-triggered interactive sound effects that respond to navigation and ending mini-game interactions, without changing existing background music behavior.
 
 **Planned changes:**
-- Remove the Teddy mini-game experience from the final slide so teddy artwork/interactions are no longer shown.
-- Create a new dedicated React component for the ending mini-game with English on-screen instructions, interactive visual feedback, simple progression, and a clear end state with replay/reset.
-- Update `frontend/src/components/Slideshow.tsx` to render the new ending-game component as the last slide in place of `TeddyGameSlide`, keeping slide navigation, indicator, swipe behavior, and music controls unchanged.
+- Add a client-side sound effects (SFX) system that plays short sounds on user interactions (Next/Previous navigation and ending mini-game taps) and never auto-plays without a user gesture.
+- Extend the existing Music controls to include a separate English-labeled toggle for “Sound Effects” that is off by default and persists via localStorage.
+- Make EndingGameSlide SFX responsive and progressive: subtle variation on each valid tap and a distinct one-time completion sound when the goal is reached, with no further SFX after completion until “Play Again”.
 
-**User-visible outcome:** The last slide now presents a new polished, romantic interactive mini-game (desktop and mobile friendly) with English instructions, visible interaction feedback, progression, and a completion moment with a replay/reset option.
+**User-visible outcome:** Users can enable “Sound Effects” to hear responsive interaction sounds during navigation and the ending mini-game, while background music, its toggle, and volume control continue to work as before.

@@ -7,6 +7,7 @@ import { EndingGameSlide } from './EndingGameSlide';
 import { MusicControls } from './MusicControls';
 import { useSwipeNavigation } from '../hooks/useSwipeNavigation';
 import { useLocalAudioSettings } from '../hooks/useLocalAudioSettings';
+import { sfxEngine } from '../lib/sfxEngine';
 
 const backgrounds = [
   '/assets/generated/romantic-bg-1.dim_1920x1080.png',
@@ -20,7 +21,7 @@ export function Slideshow() {
   const [needsUserGesture, setNeedsUserGesture] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const { isEnabled, volume } = useLocalAudioSettings();
+  const { isEnabled, volume, sfxEnabled } = useLocalAudioSettings();
 
   // Initialize audio with Tum Hi Ho
   useEffect(() => {
@@ -79,6 +80,8 @@ export function Slideshow() {
   const goToSlide = (index: number) => {
     if (index >= 0 && index < totalSlides) {
       setCurrentSlide(index);
+      // Play navigation SFX
+      sfxEngine.playNavigation(sfxEnabled, volume);
     }
   };
 
@@ -113,7 +116,7 @@ export function Slideshow() {
             backgroundImage={backgrounds[currentSlide % backgrounds.length]}
           />
         ) : (
-          <EndingGameSlide />
+          <EndingGameSlide sfxEnabled={sfxEnabled} volume={volume} />
         )}
       </div>
 

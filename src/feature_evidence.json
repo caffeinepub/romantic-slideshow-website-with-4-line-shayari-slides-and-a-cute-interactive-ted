@@ -2,10 +2,12 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-replace-the-current-final-slide-mini-game-the-teddy-mini-game-with-a-different-beautiful-interactive-mini-game-on-the-ending-slide-so-the-teddy-is-no-longer-shown-as-the-final-experience",
-      "featureTitle": "Replace the current final-slide mini-game (the teddy mini-game) with a different beautiful interactive mini-game on the ending slide, so the teddy is no longer shown as the final experience.",
+      "featureId": "feature-add-optional-interactive-music-client-side-sound-effects-that-reacts-to-user-interactions-taps-clicks-and-slide-navigation-while-keeping-background-music-behavior-unchanged",
+      "featureTitle": "Add optional interactive music (client-side sound effects) that reacts to user interactions (taps/clicks and slide navigation) while keeping background music behavior unchanged.",
       "files": [
-        "frontend/src/components/Slideshow.tsx"
+        "frontend/src/components/EndingGameSlide.tsx",
+        "frontend/src/components/Slideshow.tsx",
+        "frontend/src/lib/sfxEngine.ts"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -15,16 +17,17 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-10"
+        "REQ-13"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-implement-the-new-ending-mini-game-as-a-dedicated-react-component-and-wire-it-into-the-slideshow-so-it-renders-as-the-final-slide-in-place-of-teddygameslide",
-      "featureTitle": "Implement the new ending mini-game as a dedicated React component and wire it into the slideshow so it renders as the final slide in place of TeddyGameSlide.",
+      "featureId": "feature-extend-the-existing-local-audio-settings-and-ui-controls-to-support-interactive-sound-effects-as-a-separately-configurable-option-on-off-that-is-off-by-default-and-persists-locally",
+      "featureTitle": "Extend the existing local audio settings and UI controls to support interactive sound effects as a separately configurable option (on/off) that is off by default and persists locally.",
       "files": [
-        "frontend/src/components/EndingGameSlide.tsx",
-        "frontend/src/components/Slideshow.tsx"
+        "frontend/src/components/MusicControls.tsx",
+        "frontend/src/components/Slideshow.tsx",
+        "frontend/src/hooks/useLocalAudioSettings.ts"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -34,16 +37,16 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-11"
+        "REQ-14"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-design-the-new-ending-mini-game-to-feel-like-a-beautiful-romantic-interaction-e-g-a-tap-click-driven-visual-effect-game-with-progression-and-a-clear-end-state-and-ensure-all-user-facing-text-shown-within-the-new-game-is-in-english",
-      "featureTitle": "Design the new ending mini-game to feel like a 'beautiful' romantic interaction (e.g., a tap/click-driven visual effect game with progression and a clear end state), and ensure all user-facing text shown within the new game is in English.",
+      "featureId": "feature-make-the-ending-mini-game-s-sound-effects-feel-responsive-and-progressive-play-a-pleasant-short-sound-on-each-tap-that-varies-subtly-e-g-pitch-notes-and-play-a-distinct-completion-sound-when-the-goal-is-reached",
+      "featureTitle": "Make the ending mini-game’s sound effects feel responsive and progressive: play a pleasant, short sound on each tap that varies subtly (e.g., pitch/notes) and play a distinct completion sound when the goal is reached.",
       "files": [
         "frontend/src/components/EndingGameSlide.tsx",
-        "frontend/src/index.css"
+        "frontend/src/lib/sfxEngine.ts"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -53,7 +56,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-12"
+        "REQ-15"
       ],
       "confidence": "high"
     }
