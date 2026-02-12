@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 7,
+  "summary": "Romantic multi-slide website featuring 4-line romantic shayari per slide, with optional background music (user requested 'Tum Hi Ho') and ending with a different beautiful interactive mini-game (replacing the teddy mini-game).",
+  "architectural_notes": [
+    "Audio licensing/usage for 'Tum Hi Ho' must be clarified; avoid shipping copyrighted media without permission (consider user-provided file or royalty-free alternative)."
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-create-a-multi-slide-romantic-website-where-each-slide-displays-exactly-one-4-line-romantic-shayari-poem-with-clear-line-breaks-and-readable-typography",
+      "title": "Create a multi-slide romantic website where each slide displays exactly one 4-line romantic shayari (poem) with clear line breaks and readable typography.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-slide-navigation-with-both-click-tap-controls-next-previous-and-touch-friendly-swipe-drag-navigation-including-a-visible-slide-position-indicator",
+      "title": "Implement slide navigation with both click/tap controls (Next/Previous) and touch-friendly swipe/drag navigation, including a visible slide position indicator.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-final-slide-page-containing-a-cute-teddy-mini-game-where-touching-clicking-the-teddy-triggers-a-cute-reaction-that-is-different-every-time-randomized-from-a-set-of-reactions",
+      "title": "Add a final slide/page containing a cute teddy mini-game where touching/clicking the teddy triggers a cute reaction that is different every time (randomized from a set of reactions).",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-define-a-coherent-romantic-visual-theme-colors-typography-spacing-background-treatment-button-style-and-apply-it-consistently-across-the-slideshow-and-teddy-mini-game",
+      "title": "Define a coherent romantic visual theme (colors, typography, spacing, background treatment, button style) and apply it consistently across the slideshow and teddy mini-game.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-include-a-lightweight-local-settings-control-no-login-to-toggle-background-music-on-off-and-adjust-volume-music-must-be-optional-and-off-by-default",
+      "title": "Include a lightweight local settings control (no login) to toggle background music on/off and adjust volume; music must be optional and off by default.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-generated-static-image-assets-background-and-teddy-art-into-the-app-and-render-them-from-frontend-static-assets-not-served-by-the-backend",
+      "title": "Add generated static image assets (background and teddy art) into the app and render them from frontend static assets (not served by the backend).",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-the-tum-hi-ho-song-as-the-background-music-track-and-wire-it-into-the-existing-music-toggle-volume-system-music-must-remain-optional-and-off-by-default",
+      "title": "Add the 'Tum Hi Ho' song as the background music track and wire it into the existing music toggle/volume system (music must remain optional and off-by-default).",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-enhance-the-final-teddy-mini-game-so-touching-clicking-the-teddy-s-hand-triggers-1-a-visible-hand-movement-animation-2-a-spoken-voice-line-from-the-teddy-client-side-and-3-a-matching-facial-expression-change",
+      "title": "Enhance the final Teddy mini-game so touching/clicking the teddy's hand triggers (1) a visible hand movement animation, (2) a spoken voice line from the teddy (client-side), and (3) a matching facial expression change.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-teddy-mini-game-visuals-to-support-independent-hand-animation-by-rendering-the-teddy-as-layered-static-assets-body-hand-layer-s-while-keeping-the-existing-overall-theme-and-layout",
+      "title": "Update the Teddy mini-game visuals to support independent hand animation by rendering the teddy as layered static assets (body + hand layer(s)) while keeping the existing overall theme and layout.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-current-final-slide-mini-game-the-teddy-mini-game-with-a-different-beautiful-interactive-mini-game-on-the-ending-slide-so-the-teddy-is-no-longer-shown-as-the-final-experience",
+      "title": "Replace the current final-slide mini-game (the teddy mini-game) with a different beautiful interactive mini-game on the ending slide, so the teddy is no longer shown as the final experience.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-new-ending-mini-game-as-a-dedicated-react-component-and-wire-it-into-the-slideshow-so-it-renders-as-the-final-slide-in-place-of-teddygameslide",
+      "title": "Implement the new ending mini-game as a dedicated React component and wire it into the slideshow so it renders as the final slide in place of TeddyGameSlide.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-design-the-new-ending-mini-game-to-feel-like-a-beautiful-romantic-interaction-e-g-a-tap-click-driven-visual-effect-game-with-progression-and-a-clear-end-state-and-ensure-all-user-facing-text-shown-within-the-new-game-is-in-english",
+      "title": "Design the new ending mini-game to feel like a 'beautiful' romantic interaction (e.g., a tap/click-driven visual effect game with progression and a clear end state), and ensure all user-facing text shown within the new game is in English.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create a romantic website with multiple slides, each containing a 4-line romantic shayari",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Add background music using the 'Tum Hi Ho' song (optional/off by default with volume control)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Replace the final teddy mini-game with another beautiful interactive mini-game on the ending slide",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Romantic slideshow website with 4-line shayari slides and a cute interactive teddy mini-game",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

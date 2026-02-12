@@ -1,0 +1,65 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Replace Teddy final slide with a new romantic interactive ending mini-game",
+  "requirements": [
+    {
+      "id": "REQ-10",
+      "summary": "Replace the teddy mini-game on the final slide with a new interactive ending experience so teddy is no longer shown.",
+      "acceptanceCriteria": [
+        "When navigating to the last slide, the teddy artwork and teddy interactions are not shown.",
+        "The last slide shows a new interactive mini-game that is visually polished and consistent with the existing romantic theme.",
+        "The new mini-game works on both desktop (mouse) and mobile (touch)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Slideshow.tsx",
+          "operation": "modify",
+          "description": "Remove rendering of TeddyGameSlide on the last slide and render the new ending mini-game component instead, keeping the slideshow flow and all existing controls (navigation buttons, swipe navigation, slide indicator, music controls) intact."
+        }
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "summary": "Create a dedicated React component for the new ending mini-game and wire it as the final slideshow slide in place of TeddyGameSlide.",
+      "acceptanceCriteria": [
+        "A new component exists for the ending game (separate from TeddyGameSlide).",
+        "frontend/src/components/Slideshow.tsx renders the new ending-game component for the last slide instead of TeddyGameSlide.",
+        "Slide count, navigation buttons, swipe navigation, slide indicator, and music controls continue to work exactly as before."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/EndingGameSlide.tsx",
+          "operation": "create",
+          "description": "Add a new dedicated ending mini-game React component (to replace TeddyGameSlide) that encapsulates all interaction, progression, and end-state UI for the final slide."
+        },
+        {
+          "path": "frontend/src/components/Slideshow.tsx",
+          "operation": "modify",
+          "description": "Import and render EndingGameSlide for the final slide; update any inline comments (e.g., slide count comment) to reflect the new ending game while preserving the existing slide count logic and behavior."
+        }
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "summary": "Design the new ending mini-game as a romantic, visually polished interaction with English instructions, progression, immediate feedback, and a clear completion + replay/reset.",
+      "acceptanceCriteria": [
+        "The new game includes clear on-screen instructions in English.",
+        "The game provides immediate visual feedback for each interaction (tap/click/drag).",
+        "The game has a simple progression (e.g., accumulating a count/collecting items) and an end state (e.g., a completion moment with a replay/reset option)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/EndingGameSlide.tsx",
+          "operation": "modify",
+          "description": "Implement a romantic interaction design (e.g., tap/click anywhere to spawn animated hearts/sparkles using the existing romantic theme; track progress such as 'hearts collected' toward a goal; show a completion moment and a Replay/Reset action). Ensure it supports both mouse and touch by using pointer/touch-safe events and that all user-facing text is English. Use the existing asset frontend/public/assets/generated/heart-particles-pack.dim_128x128.png for visual feedback."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add any required global animation keyframes/utility classes for the new ending mini-game visuals (e.g., heart burst, sparkle fade, completion glow) while keeping existing romantic theme styling intact and avoiding changes under frontend/src/components/ui."
+        }
+      ]
+    }
+  ]
+}

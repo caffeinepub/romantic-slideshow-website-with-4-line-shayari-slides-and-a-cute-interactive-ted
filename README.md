@@ -1,2 +1,3 @@
-# romantic-slideshow-website-with-4-line-shayari-slides-and-a-cute-interactive-ted
-Exported from Caffeine project: Romantic slideshow website with 4-line shayari slides and a cute interactive teddy mini-game
+## 
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`

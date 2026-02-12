@@ -1,0 +1,61 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-replace-the-current-final-slide-mini-game-the-teddy-mini-game-with-a-different-beautiful-interactive-mini-game-on-the-ending-slide-so-the-teddy-is-no-longer-shown-as-the-final-experience",
+      "featureTitle": "Replace the current final-slide mini-game (the teddy mini-game) with a different beautiful interactive mini-game on the ending slide, so the teddy is no longer shown as the final experience.",
+      "files": [
+        "frontend/src/components/Slideshow.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-10"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-the-new-ending-mini-game-as-a-dedicated-react-component-and-wire-it-into-the-slideshow-so-it-renders-as-the-final-slide-in-place-of-teddygameslide",
+      "featureTitle": "Implement the new ending mini-game as a dedicated React component and wire it into the slideshow so it renders as the final slide in place of TeddyGameSlide.",
+      "files": [
+        "frontend/src/components/EndingGameSlide.tsx",
+        "frontend/src/components/Slideshow.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-11"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-design-the-new-ending-mini-game-to-feel-like-a-beautiful-romantic-interaction-e-g-a-tap-click-driven-visual-effect-game-with-progression-and-a-clear-end-state-and-ensure-all-user-facing-text-shown-within-the-new-game-is-in-english",
+      "featureTitle": "Design the new ending mini-game to feel like a 'beautiful' romantic interaction (e.g., a tap/click-driven visual effect game with progression and a clear end state), and ensure all user-facing text shown within the new game is in English.",
+      "files": [
+        "frontend/src/components/EndingGameSlide.tsx",
+        "frontend/src/index.css"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-12"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

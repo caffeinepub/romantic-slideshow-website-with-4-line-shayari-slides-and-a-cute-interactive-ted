@@ -1,0 +1,88 @@
+{
+  "kind": "build_request",
+  "title": "Replace the final Teddy mini-game with a new beautiful interactive ending game",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-10",
+      "text": "Replace the current final-slide mini-game (the teddy mini-game) with a different beautiful interactive mini-game on the ending slide, so the teddy is no longer shown as the final experience.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "change the teddy game to another beautiful game"
+        ]
+      },
+      "acceptanceCriteria": [
+        "When navigating to the last slide, the teddy artwork and teddy interactions are not shown.",
+        "The last slide shows a new interactive mini-game that is visually polished and consistent with the existing romantic theme.",
+        "The new mini-game works on both desktop (mouse) and mobile (touch)."
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "text": "Implement the new ending mini-game as a dedicated React component and wire it into the slideshow so it renders as the final slide in place of TeddyGameSlide.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "change the teddy game to another beautiful game"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A new component exists for the ending game (separate from TeddyGameSlide).",
+        "frontend/src/components/Slideshow.tsx renders the new ending-game component for the last slide instead of TeddyGameSlide.",
+        "Slide count, navigation buttons, swipe navigation, slide indicator, and music controls continue to work exactly as before."
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "text": "Design the new ending mini-game to feel like a 'beautiful' romantic interaction (e.g., a tap/click-driven visual effect game with progression and a clear end state), and ensure all user-facing text shown within the new game is in English.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "change the teddy game to another beautiful game"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The new game includes clear on-screen instructions in English.",
+        "The game provides immediate visual feedback for each interaction (tap/click/drag).",
+        "The game has a simple progression (e.g., accumulating a count/collecting items) and an end state (e.g., a completion moment with a replay/reset option)."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not modify files under frontend/src/components/ui (read-only).",
+    "Do not edit the immutable hook files listed in SYSTEM_CONTEXT.",
+    "Keep the existing slideshow flow (shayari slides first, ending mini-game as the last slide), navigation controls, swipe navigation, slide indicator, and optional/off-by-default background music behavior intact.",
+    "Backend remains a single Motoko actor; no backend changes are required for this request."
+  ],
+  "nonGoals": [
+    "Adding new authentication or requiring login for the ending game.",
+    "Adding backend persistence, leaderboards, or user accounts for the mini-game.",
+    "Changing the existing shayari content, number of shayari slides, or the music controls behavior."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [
+      "Use English for any user-facing text in the app."
+    ],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

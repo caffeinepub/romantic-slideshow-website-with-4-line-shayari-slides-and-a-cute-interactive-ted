@@ -1,0 +1,370 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 1rem;
+        
+        /* Romantic color palette - warm pinks and soft tones */
+        --background: 0.98 0.01 10;
+        --foreground: 0.2 0.02 10;
+        
+        --card: 1 0 0;
+        --card-foreground: 0.2 0.02 10;
+        
+        --popover: 1 0 0;
+        --popover-foreground: 0.2 0.02 10;
+        
+        --primary: 0.65 0.22 350;
+        --primary-foreground: 1 0 0;
+        
+        --secondary: 0.95 0.03 350;
+        --secondary-foreground: 0.3 0.02 350;
+        
+        --muted: 0.96 0.01 10;
+        --muted-foreground: 0.5 0.01 10;
+        
+        --accent: 0.92 0.08 340;
+        --accent-foreground: 0.2 0.02 340;
+        
+        --destructive: 0.577 0.245 27.325;
+        --destructive-foreground: 0.985 0 0;
+        
+        --border: 0.9 0.02 350;
+        --input: 0.9 0.02 350;
+        --ring: 0.65 0.22 350;
+        
+        /* Romantic theme colors */
+        --romantic-primary: 0.65 0.22 350;
+        --romantic-bg-start: 0.85 0.15 340;
+        --romantic-bg-end: 0.75 0.18 10;
+        
+        --chart-1: 0.646 0.222 41.116;
+        --chart-2: 0.6 0.118 184.704;
+        --chart-3: 0.398 0.07 227.392;
+        --chart-4: 0.828 0.189 84.429;
+        --chart-5: 0.769 0.188 70.08;
+    }
+
+    .dark {
+        --background: 0.15 0.02 340;
+        --foreground: 0.98 0.01 350;
+        
+        --card: 0.2 0.02 340;
+        --card-foreground: 0.98 0.01 350;
+        
+        --popover: 0.18 0.02 340;
+        --popover-foreground: 0.98 0.01 350;
+        
+        --primary: 0.75 0.25 350;
+        --primary-foreground: 0.15 0.02 350;
+        
+        --secondary: 0.25 0.03 340;
+        --secondary-foreground: 0.98 0.01 350;
+        
+        --muted: 0.25 0.02 340;
+        --muted-foreground: 0.6 0.01 350;
+        
+        --accent: 0.35 0.08 350;
+        --accent-foreground: 0.98 0.01 350;
+        
+        --destructive: 0.704 0.191 22.216;
+        --destructive-foreground: 0.98 0 0;
+        
+        --border: 0.3 0.02 340;
+        --input: 0.3 0.02 340;
+        --ring: 0.75 0.25 350;
+        
+        /* Romantic theme colors for dark mode */
+        --romantic-primary: 0.75 0.25 350;
+        --romantic-bg-start: 0.25 0.15 340;
+        --romantic-bg-end: 0.2 0.12 10;
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-family: 'Georgia', 'Times New Roman', serif;
+    }
+}
+
+@layer utilities {
+    /* Romantic theme utilities */
+    .bg-romantic-primary {
+        background-color: oklch(var(--romantic-primary));
+    }
+    
+    .text-romantic-primary {
+        color: oklch(var(--romantic-primary));
+    }
+    
+    .bg-romantic-bg-start {
+        background-color: oklch(var(--romantic-bg-start));
+    }
+    
+    .bg-romantic-bg-end {
+        background-color: oklch(var(--romantic-bg-end));
+    }
+
+    /* Animations */
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slide-up {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+
+    @keyframes bounce {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-30px);
+        }
+    }
+
+    @keyframes wiggle {
+        0%, 100% {
+            transform: rotate(0deg);
+        }
+        25% {
+            transform: rotate(-10deg);
+        }
+        75% {
+            transform: rotate(10deg);
+        }
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+    }
+
+    @keyframes jump {
+        0%, 100% {
+            transform: translateY(0) scale(1);
+        }
+        50% {
+            transform: translateY(-40px) scale(1.05);
+        }
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes shake {
+        0%, 100% {
+            transform: translateX(0);
+        }
+        25% {
+            transform: translateX(-10px);
+        }
+        75% {
+            transform: translateX(10px);
+        }
+    }
+
+    @keyframes heart-float {
+        0% {
+            opacity: 1;
+            transform: translateY(0) scale(0.5) rotate(0deg);
+        }
+        50% {
+            opacity: 0.8;
+            transform: translateY(-100px) scale(1) rotate(180deg);
+        }
+        100% {
+            opacity: 0;
+            transform: translateY(-200px) scale(0.3) rotate(360deg);
+        }
+    }
+
+    @keyframes heart-beat {
+        0%, 100% {
+            transform: scale(1);
+        }
+        25% {
+            transform: scale(1.1);
+        }
+        50% {
+            transform: scale(1);
+        }
+        75% {
+            transform: scale(1.15);
+        }
+    }
+
+    @keyframes sparkle-float {
+        0%, 100% {
+            opacity: 0.3;
+            transform: translateY(0) rotate(0deg);
+        }
+        50% {
+            opacity: 0.8;
+            transform: translateY(-30px) rotate(180deg);
+        }
+    }
+
+    @keyframes scale-in {
+        0% {
+            opacity: 0;
+            transform: scale(0.5);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes pulse-slow {
+        0%, 100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.7;
+        }
+    }
+
+    .animate-fade-in {
+        animation: fade-in 0.5s ease-out;
+    }
+
+    .animate-slide-up {
+        animation: slide-up 0.6s ease-out;
+    }
+
+    .animate-float {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .animate-bounce {
+        animation: bounce 0.6s ease-in-out;
+    }
+
+    .animate-wiggle {
+        animation: wiggle 0.5s ease-in-out;
+    }
+
+    .animate-pulse {
+        animation: pulse 0.5s ease-in-out;
+    }
+
+    .animate-jump {
+        animation: jump 0.6s ease-in-out;
+    }
+
+    .animate-spin {
+        animation: spin 0.8s ease-in-out;
+    }
+
+    .animate-shake {
+        animation: shake 0.5s ease-in-out;
+    }
+
+    .animate-heart-float {
+        animation: heart-float 2s ease-out forwards;
+    }
+
+    .animate-heart-beat {
+        animation: heart-beat 1.5s ease-in-out infinite;
+    }
+
+    .animate-sparkle-float {
+        animation: sparkle-float 6s ease-in-out infinite;
+    }
+
+    .animate-scale-in {
+        animation: scale-in 0.5s ease-out;
+    }
+
+    .animate-pulse-slow {
+        animation: pulse-slow 3s ease-in-out infinite;
+    }
+}
+
+/* Custom slider styling */
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-track {
+    background: oklch(var(--muted));
+    height: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+input[type="range"]::-moz-range-track {
+    background: oklch(var(--muted));
+    height: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: -0.25rem;
+    background-color: oklch(var(--romantic-primary));
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input[type="range"]::-moz-range-thumb {
+    background-color: oklch(var(--romantic-primary));
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input[type="range"]:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 3px oklch(var(--romantic-primary) / 0.3);
+}
+
+input[type="range"]:focus::-moz-range-thumb {
+    box-shadow: 0 0 0 3px oklch(var(--romantic-primary) / 0.3);
+}
